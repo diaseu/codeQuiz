@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Coding Quiz Challenge</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
@@ -36,9 +36,7 @@
 <header class="container">
   <!-- Navigation -->
   <div class="d-flex flex-column flex-md-row align-items-center pb-3 mt-4 border-bottom">
-    <a href="./index.html" class="d-flex align-items-center text-dark">
-      View Highscores
-    </a>
+    <button id="viewScores">View High Scores</button>
     <div class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
       <div id="time"></div>
     </div>
@@ -56,17 +54,15 @@
           <label for="initials" class="form-label">Enter your initials</label>
           <input type="text" class="form-control" name="initials" id="initials">
         </div>
-        <button class="btn btn-primary" id="submitScore">Submit Score</button>
+        <button class="btn btn-primary purple darken-4" id="submitScore">Submit Score</button>
       </form>
-      <div id="startQuiz">
         <p>You have 75 seconds to start.</p>
         <button id="startQuiz" class="btn purple darken-4 btn-lg">Start Quiz</button>
-      </div>
+      
 
     </div>
-    <div id="question" class="row">
+    <div id="question" class="row"></div>
 
-    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"

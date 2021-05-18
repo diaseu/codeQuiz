@@ -30,6 +30,7 @@ const endGame = () => {
   document.getElementById('result').textContent = `Score: ${score}`
   document.getElementById('scoreForm').className = ''
 }
+
 const renderQuestion = () => {
   document.getElementById('question').innerHTML = ''
   let qElem = document.createElement('div')
@@ -91,15 +92,10 @@ document.addEventListener('click', event => {
   }
 })
 
-document.getElementById('submitScore').addEventListener('click', event => {
-  event.preventDefault()
-  let initials = document.getElementById('initials').value
-  let scores = JSON.parse(localStorage.getItem('scores')) || []
-  scores.push({ initials, score })
-  localStorage.setItem('scores', JSON.stringify(scores))
+let scores = JSON.parse(localStorage.getItem('scores')) || []
 
-  scores.sort((a, b) => b.score - a.score)
-
+function highScore() {
+  document.getElementById('question').innerHTML = ''
   let tableElem = document.createElement('table')
   tableElem.className = 'table'
   tableElem.innerHTML = `
@@ -110,17 +106,33 @@ document.getElementById('submitScore').addEventListener('click', event => {
         </tr>
       </thead>
       `
-  let tableBody = document.createElement('tbody')
 
   for (let i = 0; i < scores.length; i++) {
+    let tableBody = document.createElement('tbody')
     tableBody.innerHTML += `
-          <tr>
-            <td>${scores[i].initials}</td>
-            <td>${scores[i].score}</td>
-          </tr>
-        `
+    <tr>
+    <td>${scores[i].initials}</td>
+    <td>${scores[i].score}</td>
+    </tr>
+    `
+    tableElem.append(tableBody)
   }
-
-  tableElem.append(tableBody)
   document.getElementById('question').append(tableElem)
+}
+
+document.getElementById('submitScore').addEventListener('click', event => {
+  event.preventDefault()
+  let initials = document.getElementById('initials').value
+  scores.push({ initials, score })
+  localStorage.setItem('scores', JSON.stringify(scores))
+
+  scores.sort((a, b) => b.score - a.score)
+
+
+  highScore()
+})
+
+document.getElementById('viewScores').addEventListener('click', event => {
+  event.preventDefault()
+  highScore()
 })
