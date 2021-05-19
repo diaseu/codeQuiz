@@ -29,6 +29,10 @@ const endGame = () => {
   document.getElementById('question').innerHTML = ''
   document.getElementById('result').textContent = `Score: ${score}`
   document.getElementById('scoreForm').className = ''
+  document.getElementById('quizHead').innerHTML = `
+    <h1>All done!</h1>
+
+  `
 }
 
 const renderQuestion = () => {
@@ -62,6 +66,7 @@ const renderQuestion = () => {
   document.getElementById('question').append(qElem)
 }
 document.getElementById('startQuiz').addEventListener('click', () => {
+  document.getElementById('quizHead').innerHTML = ''
   document.getElementById('startQuiz').remove()
   timer = setInterval(() => {
     document.getElementById('time').textContent = `Time Left: ${time} sec`
@@ -122,14 +127,30 @@ function highScore() {
 
 document.getElementById('submitScore').addEventListener('click', event => {
   event.preventDefault()
+  document.getElementById('quizHead').innerHTML = `
+    <h1>High Scores</h1>
+  `
+  document.getElementById('scoreForm').className = 'hidden'
   let initials = document.getElementById('initials').value
   scores.push({ initials, score })
   localStorage.setItem('scores', JSON.stringify(scores))
 
   scores.sort((a, b) => b.score - a.score)
-
-
   highScore()
+
+  let clearScore = localStorage.clear();  
+  let clearButton = document.getElementById('question').innerHTML += `<button id="clear">Clear Scores</button>`
+  
+  
+  
+  function clear() {
+    clearButton
+    document.getElementById('clear').addEventListener('click', event => {
+      clearScore()
+    }
+  }
+  clear()
+
 })
 
 document.getElementById('viewScores').addEventListener('click', event => {
