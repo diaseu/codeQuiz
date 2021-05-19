@@ -83,8 +83,16 @@ document.addEventListener('click', event => {
   if (event.target.classList.contains('choice')) {
     if (event.target.dataset.value === questions[current].answer) {
       score++
+      document.getElementById('rightWrong').innerHTML = 'Right!'
+      setTimeout(function () {
+        document.getElementById('rightWrong').innerHTML = ''
+      }, 1500)
     } else {
       time -= 10
+      document.getElementById('rightWrong').innerHTML = 'Wrong!'
+      setTimeout(function () {
+        document.getElementById('rightWrong').innerHTML = ''
+      }, 1500)
     }
     current++
 
