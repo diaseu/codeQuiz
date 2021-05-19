@@ -67,7 +67,7 @@ const renderQuestion = () => {
 }
 document.getElementById('startQuiz').addEventListener('click', () => {
   document.getElementById('quizHead').innerHTML = ''
-  document.getElementById('startQuiz').remove()
+  document.getElementById('startQuiz').classList.add("hidden")
   timer = setInterval(() => {
     document.getElementById('time').textContent = `Time Left: ${time} sec`
     time--
@@ -146,22 +146,34 @@ document.getElementById('submitScore').addEventListener('click', event => {
   scores.sort((a, b) => b.score - a.score)
   highScore()
 
-  let clearScore = localStorage.clear();
-  let clearButton = document.getElementById('question').innerHTML += `<button id="clear">Clear Scores</button>`
-
-
-
+  // Clear Button
   function clear() {
-    clearButton
+    document.getElementById('question').innerHTML += `<button id="clear">Clear Scores</button>`
     document.getElementById('clear').addEventListener('click', event => {
-      clearScore()
+      localStorage.clear();
     })
   }
   clear()
+
+
+  // Restart Button
+  document.getElementById('question').innerHTML += `<button id="replay">Replay</button>`
+
+  document.getElementById('replay').addEventListener('click', event => {
+    document.getElementById('quizHead').innerHTML = `
+    <h1 class="display-4 my-4">Coding Quiz Challenge</h1>
+      <p class="lead">Try to answer the following code-related questions within the time limit.<br />Keep in mind that the incorrect answers will penalize your score/time by 10 seconds!</p>
+      <p>You have 75 seconds to start.</p>`
+    document.getElementById('startQuiz').classList.remove("hidden")
+    document.getElementById('question').innerHTML = ''
+  })
 
 })
 
 document.getElementById('viewScores').addEventListener('click', event => {
   event.preventDefault()
+  document.getElementById('quizHead').innerHTML = `
+    <h1>High Scores</h1>
+  `
   highScore()
 })
