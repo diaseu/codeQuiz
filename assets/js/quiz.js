@@ -138,16 +138,16 @@ document.getElementById('submitScore').addEventListener('click', event => {
   scores.sort((a, b) => b.score - a.score)
   highScore()
 
-  let clearScore = localStorage.clear();  
+  let clearScore = localStorage.clear();
   let clearButton = document.getElementById('question').innerHTML += `<button id="clear">Clear Scores</button>`
-  
-  
-  
+
+
+
   function clear() {
     clearButton
     document.getElementById('clear').addEventListener('click', event => {
       clearScore()
-    }
+    })
   }
   clear()
 
